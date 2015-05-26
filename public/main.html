@@ -1,0 +1,34 @@
+<!--main.html-->
+<!doctype html>
+<html>
+
+
+  <head>
+    <title>Corruption</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+    <script src="../javascripts/poiApp.js"></script>
+  </head>
+
+
+  <body ng-app="app">
+    <div id='main' ng-controller='ctrl' ng-switch on="toggle">
+
+      <form ng-submit="search()" ng-controller="ctrl">
+        <input type="text" ng-model="searchText" value="">
+        <input type="submit" name="submit" value="Search">
+      </form>
+
+      <button ng-click='toggleView()' name="Toggle">Toggle</button>
+
+      <div ng-switch-when="searchResults">
+        <pre>{{viewText}}</pre>
+      </div>
+      <div ng-switch-when="savedResults">
+        <pre>{{viewText}}</pre>
+      </div>
+
+    </div>
+  </body>
+
+
+</html>
