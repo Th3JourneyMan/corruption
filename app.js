@@ -10,7 +10,9 @@ mongoose.connect('mongodb://localhost/test');
 //models and routes
 var models = require('./models/models');
 var persons = require('./routes/persons');
+var users = require('./routes/users');
 
+//INITIATE
 var app = express();
 
 // view engine setup
@@ -27,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/', routes);
 app.use('/api', persons);
+app.use('/api', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

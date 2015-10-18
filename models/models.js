@@ -7,7 +7,8 @@ var pofISchema = new Schema({
   fn: String,
   ln: String,
   dob: Date
-});
+},
+{strict: true});
 /*  keywords: [], //Array of strings
   donations: [
     {
@@ -42,6 +43,7 @@ var pofISchema = new Schema({
   ]
 });
 */
+pofISchema.index({fn:1, ln:1, dob:1}, {unique:true});
 
 //user schema
 var userSchema = new Schema({
@@ -52,11 +54,19 @@ var userSchema = new Schema({
   postList: [{
     id: String,
     status: {
-      values: 'approved flagged mistaken grossError'.split(' '),
-      message: 'postList enum validator failed for path `{PATH}` with value `{VALUE}`'
+      values: {
+        type: String,
+        enum: 'approved flagged mistaken grossError'.split(' ')
+      }
     }
-  }]
+  }],
+  personList: [
+    String
+  ]
+},
+{strict: true});
+userSchema.index({username:1, pwdHash:1, email:1}, {unique:true});
 
-});
+
 mongoose.model('PofI', pofISchema);
-//mongoose.model('User', userSchema);
+mongoose.model('User', userSchema);
