@@ -51,17 +51,18 @@ var userSchema = new Schema({
   pwdHash: String,
   email: String,
   isMod: Boolean,
-  postList: [{
-    id: String,
+  userPosts: [{
+    id: {type: Schema.ObjectId},
     status: {
       values: {
         type: String,
         enum: 'approved flagged mistaken grossError'.split(' ')
       }
-    }
+    },
+    createdAt: { type: Date, default: Date.now}
   }],
   personList: [
-    String
+    Schema.ObjectId
   ]
 },
 {strict: true});

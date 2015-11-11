@@ -1,6 +1,14 @@
-var app = angular.module('app', []);
+var app = angular.module('app', ['ngRoute']);
 
-app.controller('ctrl', function($scope){
+app.config(function($routeProvider){
+  $routeProvider
+    .when('/', {
+          templateUrl: 'main.html',
+          controller: 'mainController'
+    });
+});
+
+app.controller('mainController', function($scope){
 
   $scope.viewText = "Search Results";
   $scope.toggle = 'searchResults';
